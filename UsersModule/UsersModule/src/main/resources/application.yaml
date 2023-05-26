@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/serverlogin
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+
+  application:
+    name: user-service
+
+eureka:
+  client:
+    prefer-same-zone-eureka: false
+    serviceUrl:
+      defaultZone: http://Abhishek:Baghel@10.0.61.193:8761/eureka/
+  instance:
+    prefer-Ip-Address: true
+    instance-id: ${server.address}:${spring.application.name}:${server.port}
+
+DB_CLOSE_DELAY: -1
+DB_CLOSE_ON_EXIT: FALSE
+server:
+  address: 10.0.61.193
+  port: 8077
