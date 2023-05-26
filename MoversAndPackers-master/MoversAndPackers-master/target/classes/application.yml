@@ -1,0 +1,44 @@
+server:
+  address: 10.0.61.193
+  port: 3500
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+
+        - id: PACKING-SERVICE
+          uri: lb://PACKING-SERVICE
+          predicates:
+            - Path=/package/**
+
+        - id: TRANSPORT-SERVICE
+          uri: lb://TRANSPORT-SERVICE
+          predicates:
+            - Path=/transporter/**
+
+        - id: ADMIN-SERVICE
+          uri: lb://ADMIN-SERVICE
+          predicates:
+            - Path=/admin/**
+
+eureka:
+  instance:
+    prefer-Ip-Address: true
+    instance-id: ${server.address}:${spring.application.name}:${server.port}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://10.0.61.193:8761/eureka
+
+
+
+
+
